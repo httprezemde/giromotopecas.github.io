@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giro Moto Peças (Compact)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+    <style>
+        /* Base e Neon */
+        body { font-family: 'VT323', monospace; background: #000; color: #fff; margin: 0; padding: 0; overflow-x: hidden; line-height: 1.6; scroll-behavior: smooth; }
+        .neon-green { color: #00ff00; text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00; }
+        .neon-red { color: #ff0000; text-shadow: 0 0 5px #ff0000, 0 0 10px #ff0000; }
+        .press-start { font-family: 'Press Start 2P', cursive; }
+        
+        /* Glitch Effect */
+        .glitch { animation: glitch 1s infinite alternate; position: relative; }
+        @keyframes glitch {
+            0% { transform: translate(0); }
+            40% { transform: translate(-2px, -2px); color: #ff0000; }
+            80% { transform: translate(2px, 2px); color: #00ff00; }
+            100% { transform: translate(0); }
+        }
+        
+        /* Layout de Seção */
+        .section { padding: 60px 10px; text-align: center; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; position: relative; }
+        
+        /* Pixel Box (Quem Somos) */
+        .pixel-box { border: 2px solid #808080; padding: 20px; margin: 20px auto; max-width: 700px; background: rgba(30, 30, 30, 0.8); box-shadow: 0 0 5px #808080; }
+        
+        /* Botões */
+        .button {
+            background: #00ff00; color: #000; border: 2px solid #00ff00; padding: 12px 25px;
+            font-family: 'Press Start 2P', cursive; font-size: 14px; cursor: pointer;
+            animation: blink 1.2s infinite alternate; text-transform: uppercase; margin-top: 15px;
+            box-shadow: 0 0 8px #00ff00; text-decoration: none; display: inline-block;
+        }
+        .button:hover { box-shadow: 0 0 15px #00ff00; transform: scale(1.02); transition: all 0.2s; }
+        .button-red { background: #ff0000; border-color: #ff0000; box-shadow: 0 0 8px #ff0000; }
+        .button-red:hover { box-shadow: 0 0 15px #ff0000; }
+
+        /* Grid de Serviços - Reduzido para 3 colunas por default */
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; max-width: 900px; margin: 30px auto; }
+        .service-item { background: rgba(50, 50, 50, 0.9); border: 2px solid #00ff00; padding: 15px; box-shadow: 0 0 8px rgba(0, 255, 0, 0.5); cursor: pointer; transition: transform 0.2s; }
+        .service-item:hover { transform: translateY(-3px); box-shadow: 0 0 15px #00ff00; }
+        .icon { width: 50px; height: 50px; margin: 0 auto 10px; border: 2px solid #808080; display: flex; justify-content: center; align-items: center; font-size: 20px; color: #00ff00; }
+
+        /* Mapa */
+        .map-container { position: relative; width: 90%; max-width: 700px; height: 350px; background: #333; margin: 20px auto; border: 2px solid #00ff00; box-shadow: 0 0 10px #00ff00; overflow: hidden; }
+        .map-container iframe { width: 100%; height: 100%; border: none; filter: grayscale(100%) brightness(50%) contrast(150%) hue-rotate(100deg); }
+        .map-container p { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: #00ff00; font-family: 'Press Start 2P', cursive; font-size: 16px; text-shadow: 0 0 5px #00ff00; }
+
+        /* Form e Contato */
+        .form-container { max-width: 450px; background: rgba(30, 30, 30, 0.9); border: 2px solid #ff0000; padding: 25px; box-shadow: 0 0 12px #ff0000; margin-top: 30px;}
+        .form input { font-family: 'VT323', monospace; padding: 10px; margin: 8px 0; width: calc(100% - 20px); border: 1px solid #808080; background: #000; color: #00ff00; font-size: 14px; box-shadow: inset 0 0 3px rgba(0, 255, 0, 0.3); }
+
+        /* Scroll Effect (Engasgo) - Recalculado para ser mais suave */
+        .engasgo { animation: engasgo 0.4s ease-in-out; }
+        @keyframes engasgo {
+            0% { transform: translateY(0); }
+            25% { transform: translateY(-10px); }
+            50% { transform: translateY(10px); }
+            75% { transform: translateY(-5px); }
+            100% { transform: translateY(0); }
+        }
+
+        /* Footer */
+        .footer { background: #1a1a1a; padding: 15px; text-align: center; font-size: 12px; color: #808080; border-top: 1px solid #333; font-family: 'Press Start 2P', cursive; }
+        .footer a { color: #00ff00; text-decoration: underline; cursor: pointer; }
+    </style>
+</head>
+<body>
+    
+    <div id="title-screen" class="section">
+        <h1 class="press-start glitch" style="font-size: 40px; margin-bottom: 20px;">
+            <span class="neon-green">GIRO</span> <span class="neon-red">Moto Peças</span>
+        </h1>
+        <p class="press-start" style="font-size: 20px; margin-top: 30px; text-shadow: 0 0 5px #fff;">SUA RIDE. NOSSO LEVEL.</p>
+        <button class="button" onclick="scrollToSection('quem-somos')">ACELERAR!</button>
+    </div>
+
+    <div id="quem-somos" class="section">
+        <div class="pixel-box">
+            <h2 class="press-start neon-green" style="font-size: 28px;">&lt; INICIANDO TRANSMISSÃO: QUEM SOMOS?! &gt;</h2>
+            <p style="font-size: 16px; margin-top: 15px;">MOTOQUEIRO! Somos a <span class="neon-red">ELITE</span> da mecânica e customização em Campinas. Nosso time conserta e <span class="neon-green">dá um UP</span> na sua máquina.</p>
+            <p class="neon-green press-start" style="font-size: 18px; margin-top: 25px;">OBJETIVO: CONFIANÇA + DIVERSÃO.</p>
+            <button class="button" style="font-size: 10px; animation: none; background: #808080; border-color: #808080; color: #fff; box-shadow: none;" onclick="scrollToSection('servicos')">CONFIRM: NEXT LEVEL</button>
+        </div>
+    </div>
+
+    <div id="servicos" class="section">
+        <h2 class="press-start neon-green" style="font-size: 32px; margin-bottom: 40px;">&gt; MENU DE POWER-UPS</h2>
+        <div class="services-grid">
+            <div class="service-item">
+                <div class="icon" style="background: #00ff00;">🔧</div>
+                <h3 class="press-start neon-green">MANUTENÇÃO FULL</h3>
+                <p>Revisão, motor, freios. Pronta para a próxima fase.</p>
+            </div>
+            <div class="service-item">
+                <div class="icon" style="background: #ff0000;">🎨</div>
+                <h3 class="press-start neon-green">CUSTOMIZAÇÃO</h3>
+                <p>Mudança de visual e performance. Sua assinatura.</p>
+            </div>
+            <div class="service-item">
+                <div class="icon" style="background: #0000ff;">⚙️</div>
+                <h3 class="press-start neon-green">VENDA DE PEÇAS</h3>
+                <p>Peças originais e acessórios TOP de linha.</p>
+            </div>
+        </div>
+        <button class="button" onclick="scrollToSection('localizacao')">COMO CHEGAR?</button>
+    </div>
+
+    <div id="localizacao" class="section">
+        <h2 class="press-start neon-green" style="font-size: 32px; margin-bottom: 30px;">&gt; ACESSE O CHECKPOINT</h2>
+        <div class="map-container">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3675.2952402120023!2d-47.0583725850346!3d-22.90561578499709!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94c8c7f9f3b1b601%3A0x24d4a8d0b2f5d96a!2sCampinas%2C%20SP!5e0!3m2!1spt-BR!2sbr!4v1678901234567!5m2!1spt-BR!2sbr" allowfullscreen="" loading="lazy"></iframe>
+            <p class="press-start">MAPA PIXELADO ONLINE</p>
+        </div>
+        <p class="press-start" style="font-size: 16px; color: #808080; margin-top: 20px;">
+            ENDEREÇO: <span class="neon-green"> Av. Orosimbo Maia, 1121 - Campinas - SP</span>
+        </p>
+        <button class="button button-red" onclick="window.open('https://maps.app.goo.gl/VVP2pZNZNG1GR3xX8', '_blank')">ROTA GPS</button>
+    </div>
+
+    <div id="contato" class="section">
+        <div class="form-container">
+            <h2 class="press-start neon-green" style="font-size: 28px;">&gt; TRANSMITIR DADOS</h2>
+            <form class="form">
+                <input type="text" placeholder="Seu Nickname/Nome"><br>
+                <input type="text" placeholder="Qual a sua Missão? (Serviço)"><br>
+                <input type="text" placeholder="Código de Acesso (Telefone/WhatsApp)">
+            </form>
+            <div style="margin-top: 15px;">
+                <p class="press-start" style="font-size: 14px;">WHATSAPP COMANDO: <span class="neon-red">(19)97146-5043</span></p>
+            </div>
+            <button class="button button-red" onclick="alert('Transmissão enviada!')">ENVIAR TRANSMISSÃO</button>
+        </div>
+    </div>
+
+    <div class="footer">
+        Giro Moto Peças © <span id="current-year"></span> | TODOS OS DIREITOS RESERVADOS. | GAME OVER? <a href="javascript:void(0)" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">[Subir ao Topo]</a>
+    </div>
+
+    <script>
+        function scrollToSection(id) {
+            const element = document.getElementById(id);
+            if (element) {
+                // Aplica o efeito de "engasgo" (glitch scroll)
+                element.classList.add('engasgo');
+                
+                // Rola para o elemento
+                setTimeout(() => {
+                    element.scrollIntoView({ behavior: 'smooth' });
+                    // Remove o efeito após a rolagem para que possa ser acionado novamente
+                    setTimeout(() => element.classList.remove('engasgo'), 500); 
+                }, 100);
+            }
+        }
+
+        // Script para atualizar ano no rodapé
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('current-year').textContent = new Date().getFullYear();
+        });
+    </script>
+</body>
+</html>
