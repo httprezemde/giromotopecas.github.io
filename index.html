@@ -80,7 +80,7 @@
 
     <div id="quem-somos" class="section">
         <div class="pixel-box">
-            <h2 class="press-start neon-green" style="font-size: 28px;">&lt; INICIANDO TRANSMISSÃO: QUEM SOMOS?! &gt;</h2>
+            <h2 class="press-start neon-green" style="font-size: 28px;">< INICIANDO TRANSMISSÃO: QUEM SOMOS?! ></h2>
             <p style="font-size: 16px; margin-top: 15px;">MOTOQUEIRO! Somos a <span class="neon-red">ELITE</span> da mecânica e customização em Campinas. Nosso time conserta e <span class="neon-green">dá um UP</span> na sua máquina.</p>
             <p class="neon-green press-start" style="font-size: 18px; margin-top: 25px;">OBJETIVO: CONFIANÇA + DIVERSÃO.</p>
             <button class="button" style="font-size: 10px; animation: none; background: #808080; border-color: #808080; color: #fff; box-shadow: none;" onclick="scrollToSection('servicos')">CONFIRM: NEXT LEVEL</button>
@@ -88,7 +88,7 @@
     </div>
 
     <div id="servicos" class="section">
-        <h2 class="press-start neon-green" style="font-size: 32px; margin-bottom: 40px;">&gt; MENU DE POWER-UPS</h2>
+        <h2 class="press-start neon-green" style="font-size: 32px; margin-bottom: 40px;">> MENU DE POWER-UPS</h2>
         <div class="services-grid">
             <div class="service-item">
                 <div class="icon" style="background: #00ff00;">🔧</div>
@@ -110,7 +110,7 @@
     </div>
 
     <div id="localizacao" class="section">
-        <h2 class="press-start neon-green" style="font-size: 32px; margin-bottom: 30px;">&gt; ACESSE O CHECKPOINT</h2>
+        <h2 class="press-start neon-green" style="font-size: 32px; margin-bottom: 30px;">> ACESSE O CHECKPOINT</h2>
         <div class="map-container">
             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3675.2952402120023!2d-47.0583725850346!3d-22.90561578499709!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94c8c7f9f3b1b601%3A0x24d4a8d0b2f5d96a!2sCampinas%2C%20SP!5e0!3m2!1spt-BR!2sbr!4v1678901234567!5m2!1spt-BR!2sbr" allowfullscreen="" loading="lazy"></iframe>
             <p class="press-start">MAPA PIXELADO ONLINE</p>
@@ -123,16 +123,16 @@
 
     <div id="contato" class="section">
         <div class="form-container">
-            <h2 class="press-start neon-green" style="font-size: 28px;">&gt; TRANSMITIR DADOS</h2>
+            <h2 class="press-start neon-green" style="font-size: 28px;">> TRANSMITIR DADOS</h2>
             <form class="form">
-                <input type="text" placeholder="Seu Nickname/Nome"><br>
-                <input type="text" placeholder="Qual a sua Missão? (Serviço)"><br>
-                <input type="text" placeholder="Código de Acesso (Telefone/WhatsApp)">
+                <input type="text" id="nickname" placeholder="Seu Nickname/Nome"><br>
+                <input type="text" id="missao" placeholder="Qual a sua Missão? (Serviço)"><br>
+                <input type="text" id="codigo" placeholder="Código de Acesso (Telefone/WhatsApp)">
             </form>
             <div style="margin-top: 15px;">
                 <p class="press-start" style="font-size: 14px;">WHATSAPP COMANDO: <span class="neon-red">(19)97146-5043</span></p>
             </div>
-            <button class="button button-red" onclick="alert('Transmissão enviada!')">ENVIAR TRANSMISSÃO</button>
+            <button class="button button-red" onclick="enviarWhatsapp()">ENVIAR TRANSMISSÃO</button>
         </div>
     </div>
 
@@ -156,11 +156,37 @@
             }
         }
 
+        // --- FUNÇÃO PARA WHATSAPP ---
+        function enviarWhatsapp() {
+            // 1. Coletar os valores dos campos usando os IDs
+            const nickname = document.getElementById('nickname').value;
+            const missao = document.getElementById('missao').value;
+            const codigo = document.getElementById('codigo').value;
+
+            // 2. Número de telefone no formato internacional (55 é o código do Brasil)
+            const telefone = '5519971465043';
+
+            // 3. Montar a mensagem pré-preenchida, usando encodeURIComponent para caracteres especiais
+            const mensagem = encodeURIComponent(
+                `[GIRO MOTO PEÇAS - TRANSMISSÃO DE DADOS]\n` +
+                `Nickname/Nome: ${nickname}\n` +
+                `Missão/Serviço: ${missao}\n` +
+                `Código de Acesso (Telefone): ${codigo}\n\n` +
+                `-- SOLICITAÇÃO DE CONTATO VIA SITE --`
+            );
+
+            // 4. Construir o link do WhatsApp
+            const linkWhatsapp = `https://api.whatsapp.com/send?phone=${telefone}&text=${mensagem}`;
+
+            // 5. Abrir o link em uma nova aba
+            window.open(linkWhatsapp, '_blank');
+        }
+        // -----------------------------
+
         // Script para atualizar ano no rodapé
         document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('current-year').textContent = new Date().getFullYear();
         });
     </script>
 </body>
-
 </html>
